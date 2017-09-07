@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Students Database</title>
+  </head>
+  <h1>Students Database</h1><br>
+  <a href="/students/add">ADD STUDENTS</a><br>
+  <body>
+    <table border ="1">
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Options</th>
+      </tr>
+      <%data.forEach(z=>{%>
+        <tr>
+          <td><%=z.id%></td>
+          <td><%=z.first_name%></td>
+          <td><%=z.last_name%></td>
+          <td><%=z.email%></td>
+          <td>
+            <a href="/students/edit/<%=z.id%>">EDIT</a> ||
+            <a href="/students/delete/<%=z.id%>" onclick="return confirm('delete this student?')">DELETE</a>
+          </td>
+      <%})%>
+      </tr>
+    </table><br>
+    <script>
+      function myFunction() {
+          return confirm("you sure want to delete?");
+        }
+    </script>
+
+
+
+    <a href="/">Home</a>
+  </body>
+</html>

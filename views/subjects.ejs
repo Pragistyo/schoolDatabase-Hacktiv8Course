@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Subjects Database</title>
+  </head>
+  <h1>Subjects Database</h1><br>
+  <a href="/subjects/add">ADD SUBJECTS</a><br>
+  <body>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>subject_name</th>
+        <th>Options</th>
+      </tr>
+      <%data.forEach(z=>{%>
+      <tr>
+          <td><%=z.id%></td>
+          <td><%=z.subject_name%></td>
+          <td>
+            <a href="/subjects/edit/<%=z.id%>">EDIT</a>
+            <a href="/subjects/edit/<%=z.id%>">DELETE</a>
+          </td>
+        <%})%>
+      </tr>
+    </table><br>
+    <a href="/">Home</a>
+  </body>
+</html>

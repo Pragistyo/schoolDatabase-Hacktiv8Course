@@ -37,7 +37,7 @@ router.get('/:id/givescore',(req,res)=>{
                                   where:{StudentId:req.params.id},
                                })
     .then(rowsConjunction=>{
-      console.log(rowsConjunction[0].SubjectId);
+      // console.log(rowsConjunction[0].SubjectId);
       res.render('subjectGiveScore',{data:rows,dataConjunction:rowsConjunction})
     })
   })
@@ -53,7 +53,7 @@ router.post('/:id/givescore',(req,res)=>{ //params punya student
                               {where:{StudentId:req.params.id}}
                               )
   .then(()=>{
-    res.redirect(`/subjects/${req.body.SubjectId}/enrolledstudent`)
+    res.redirect(`/subjects/${req.body.SubjectId}/enrolledstudents`)
   })
 })
 

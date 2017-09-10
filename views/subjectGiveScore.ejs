@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>GIVE SCORE TO STUDENT</title>
+  </head>
+  <h1>GIVE SCORE TO STUDENT</h1>
+  <body>
+    <form action="/subjects/<%=data.id%>/givescore" method="post">
+      <fieldset>
+        <div class="form-group">
+            <label>FIRST NAME</label>:
+            <label name= "first_name"><%=data.first_name%></label>
+        </div><br>
+        <div class="form-group">
+            <label>LAST NAME</label>:
+            <label name= "last_name"><%=data.last_name%></label>
+        </div><br>
+        <div class="form-group">
+            <label>SUBJECT</label>  :
+            <label name= "SubjectId" value="<%=dataConjunction[0].SubjectId%>"><%=dataConjunction[0].Subject.subject_name%></label>
+        </div><br>
+      </fieldset><br>
+      <div class="form-group">
+      <label>Give Score:</label><br>
+          <input type="number" name="score" min="0" max="100"><br>
+          <button type="submit">sign score</button>
+      </div>
+    </form>
+  </body>
+</html>

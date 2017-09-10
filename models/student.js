@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     email: {
             type: DataTypes.STRING,
             allowNull: false,
-            Unique   : true,
+            unique   : {msg:"Email already exist"},
             validate:{
                       isEmail:true,
                       }
@@ -20,5 +20,9 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+
+  Student.associate = models=>{
+    Student.belongsToMany(models.Subject,{through:'StudentSubjects'})
+  }
   return Student;
 };

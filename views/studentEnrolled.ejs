@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ENROLLED STUDENT</title>
+  </head>
+  <h1><%=data.subject_name%></h1>
+  <a href="/subjects"> return to subject list</a><br><br>
+  <body>
+    <table border ="1">
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+      <%dataConjunction.forEach(z=>{%>
+      <tr>
+        <td><%=`${z.Student.first_name} ${z.Student.last_name}`%></td>
+        <%if(z.score){%>
+          <td><%=z.score%></td>
+        <%}else{%>
+          <td><a href="/subjects/<%=z.StudentId%>/givescore">GIVE SCORE</a></td>
+        <%}%>
+        <%})%>
+      </tr>
+    </table>
+  </body>
+</html>

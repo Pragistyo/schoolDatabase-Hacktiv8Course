@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const model   = require('../models')
 
-
+//----------------------------FIRST PAGE---------------------------
 router.get('/',(req,res)=>{
   model.Student.findAll().then(deny=>{
     res.render('students',{data:deny})
@@ -32,7 +32,7 @@ router.post('/add',(req,res)=>{
   .catch(err=>{
     // res.send(err)
     // res.send('blabla')
-    res.render('studentsAdd',{err_msg:"Validation error: email format is incorrect"})
+    res.render('studentsAdd',{err_msg:"Validation error: email format is incorrect or already exist"})
   })
 })
 //-------------------------GET EDIT-----------------------------
@@ -66,8 +66,29 @@ router.post('/edit/:id',(req,res)=>{
   })
 })
 
+//----------------------ADD SUBJECT TO STUDENT--------------------------------
+router.get('/:id/addsubject',(req,res)=>{
+  model.Student.findById(req.params.id).then(rows=>{
+    model.Subject.findAll().then(rowsSubject=>{
+      res.render('subjectStudentAdd',{data:rows,dataSubject:rowsSubject,err_msg:false})
+    })
+  })
+})
 
-//-------------------------DELETE-------------------------------
+router.post('/:id/addsubject',(req,res)=>{
+  model.StudentSubject.create({
+                                StudentId:req.params.id,
+                                SubjectId:req.body.SubjectId
+                              })
+  .then(()=>{
+    res.redirect('/students')
+  })
+  .catch(err=>{
+    throw err.toString()
+  })
+})
+
+//-------------------------DELETE----------------------------------
 
 router.get('/delete/:id',(req,res)=>{
   model.Student.destroy({where:{id:req.params.id}}).then(()=>{

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ADD TEACHERS</title>
+    <h1>ADD TEACHERS DATA</h1><br>
+    <a href="/teachers">show all data</a><br>
+  </head>
+  <body>
+    <form action="/teachers/add" method="post">
+      <fieldset>
+        <label>First Name: </label><br>
+        <input type="text" name="first_name" value="" placeholder="input your First Name"><br>
+        <label>Last Name: </label><br>
+        <input type="text" name="last_name" value="" placeholder="input your Last Name"><br>
+        <label>Email: </label><br>
+        <input type="text" name="email" value="" placeholder="input your Email"><br>
+        <select name="SubjectId">
+          <%data.forEach(z=>{%>
+            <option value="<%=z.id%>"><%=z.subject_name%></option>
+          <%})%>
+        </select>
+        <button type="submit">SAVE</button>
+      </fieldset>
+    </form><br>
+    <%if(err_msg){ %>
+      <p><%=err_msg%></p>
+      <%  }%>
+    <a href="/students">BACK</a>
+  </body>
+</html>

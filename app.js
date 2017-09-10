@@ -18,6 +18,6 @@ app.use('/students', students)
 app.use('/teachers', teachers)
 
 
-app.listen(3000,()=>{
-  console.log('Port 3000 Opened !');
+app.listen(3003,()=>{
+  console.log('Port 3003 Opened !');
 })

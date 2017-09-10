@@ -13,6 +13,7 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
+        <th>Subject</th>
         <th>Options</th>
       </tr>
       <%data.forEach(z=>{%>
@@ -21,6 +22,11 @@
           <td><%=z.first_name%></td>
           <td><%=z.last_name%></td>
           <td><%=z.email%></td>
+          <%if(z.Subject){%>
+            <td><%=z.Subject.subject_name%></td>
+          <%}else{%>
+            <td>Unassign</td>
+          <%}%>
           <td>
             <a href="/teachers/edit/<%=z.id%>">EDIT</a> ||
             <a href="/teachers/delete/<%=z.id%>">DELETE</a>

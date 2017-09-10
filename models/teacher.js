@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
   var Teacher = sequelize.define('Teacher', {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
-    email: DataTypes.STRING
+    email: DataTypes.STRING,
+    SubjectId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
@@ -11,5 +12,9 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+
+  Teacher.associate = models=>{
+    Teacher.belongsTo(models.Subject)
+  }
   return Teacher;
 };

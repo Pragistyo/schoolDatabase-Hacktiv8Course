@@ -11,12 +11,26 @@
       <tr>
         <th>ID</th>
         <th>subject_name</th>
+        <th>Assigned Teacher</th>
+        <th>Action</th>
         <th>Options</th>
       </tr>
       <%data.forEach(z=>{%>
       <tr>
           <td><%=z.id%></td>
           <td><%=z.subject_name%></td>
+          <%if(z.Teachers){%>
+            <%let arr   = []%>
+            <%let count = 0%>
+            <%z.Teachers.forEach(a=>{%>
+              <%count ++%>
+              <%arr.push(`${count}. ${a.first_name} ${a.last_name}`)%>
+            <%})%>
+            <td><%=arr.join('\n')%></td>
+          <%}else{%>
+            <td>No Teacher assigned yet</td>
+          <%}%>
+          <td><a href="/subjects/<%=z.id%>/enrolledstudents">enrolled students</a></td>
           <td>
             <a href="/subjects/edit/<%=z.id%>">EDIT</a>
             <a href="/subjects/edit/<%=z.id%>">DELETE</a>

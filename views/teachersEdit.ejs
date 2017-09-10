@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>EDIT TEACHER</title><br>
+    <a href="/teachers">show all data</a>
+  </head>
+  <body>
+    <form action="/teachers/edit/<%=data.id%>" method="post">
+      <fieldset>
+        <label>First Name: </label><br>
+        <input type="text" name="first_name" value="<%=data.first_name%>" placeholder="input your First Name"><br>
+        <label>Last Name: </label><br>
+        <input type="text" name="last_name" value="<%=data.last_name%>" placeholder="input your Last Name"><br>
+        <label>Email: </label><br>
+        <input type="text" name="email" value="<%=data.email%>" placeholder="input your Email"><br>
+        <select name="SubjectId">
+          <%dataSubject.forEach(z=>{%>
+            <%if(z.id == data.SubjectId){%>
+              <option value="<%=z.id%>"selected><%=z.subject_name%></option>
+            <%}else{%>
+            <option value="<%=z.id%>"><%=z.subject_name%></option>
+          <% }%>
+          <%})%>
+        </select>
+        <button type="submit">SAVE</button>
+      </fieldset>
+    </form>
+    <%if(err_msg){ %>
+      <p><%=err_msg%></p>
+      <%  }%>
+  </body>
+</html>

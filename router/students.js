@@ -5,8 +5,21 @@ const model   = require('../models')
 //----------------------------FIRST PAGE---------------------------
 router.get('/',(req,res)=>{
   model.Student.findAll().then(deny=>{
+    let alphabetArr  = "abcdefghijklmnopqrstuvwxyz".split('')
+    for (var i = 0; i < deny.length; i++) {
+      for (var j = i+1; j < deny.length; j++) {
+        let index        =  alphabetArr.indexOf(deny[i].dataValues.first_name[0].toLowerCase())
+        let indexSebelah =  alphabetArr.indexOf(deny[j].dataValues.first_name[0].toLowerCase())
+        let tmp;
+        if(index > indexSebelah){
+            tmp       = deny[i]
+            console.log(tmp);
+            deny[i] = deny[j]
+            deny[j] = tmp
+          }
+      }
+    }
     res.render('students',{data:deny})
-    // res.send(deny)
   })
   .catch(err=>{
     throw err.toString()

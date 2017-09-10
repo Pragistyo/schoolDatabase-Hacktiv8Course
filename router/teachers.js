@@ -5,9 +5,24 @@ const model        = require('../models')
 //-----------------------------GET------------------------------
 router.get('/',(req,res)=>{
   model.Teacher.findAll({include:[model.Subject]}).then(jainal=>{
-    // res.send(jainal)
-    res.render('teachers',{data:jainal})
-    // res.send(jainal)
+    
+      let alphabetArr  = "abcdefghijklmnopqrstuvwxyz".split('')
+      for (var i = 0; i < jainal.length; i++) {
+        for (var j = i+1; j < jainal.length; j++) {
+          let index        =  alphabetArr.indexOf(jainal[i].dataValues.first_name[0].toLowerCase())
+          let indexSebelah =  alphabetArr.indexOf(jainal[j].dataValues.first_name[0].toLowerCase())
+          let tmp;
+          if(index > indexSebelah){
+              tmp       = jainal[i]
+              console.log(tmp);
+              jainal[i] = jainal[j]
+              jainal[j] = tmp
+            }
+        }
+      }
+      // console.log(index);
+      res.render('teachers',{data:jainal})
+      // res.send(jainal)
   })
 })
 //----------------------------ADD-------------------------------

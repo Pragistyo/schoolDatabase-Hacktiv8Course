@@ -5,7 +5,7 @@ const model   = require('../models')
 
 router.get('/',(req,res)=>{
   model.Subject.findAll({include:[model.Teacher]}).then(blabla=>{
-    res.render('subjects',{data:blabla})
+    res.render('subjects',{data:blabla,pageTitle:'Subjects'})
     // res.send(blabla)
   })
 })
@@ -14,14 +14,12 @@ router.get('/',(req,res)=>{
 router.get('/:id/enrolledstudents',(req,res)=>{
 
   model.Subject.findById(req.params.id).then(rows=>{
-    model.StudentSubject.findAll({
+    model.Subject.findAll({
                                  include:[model.Student],
-                                 where:{SubjectId:req.params.id}
+                                 where:{id:req.params.id}
                                 })
       .then(rowsConjunction=>{
-        // console.log('============================');
-      // res.send(rowsConjunction)
-      res.render('studentEnrolled',{data:rows,dataConjunction:rowsConjunction})
+      res.render('studentEnrolled',{data:rowsConjunction[0]})
     })
   })
   .catch(err=>{
@@ -30,14 +28,17 @@ router.get('/:id/enrolledstudents',(req,res)=>{
 })
 
 //-------------------------GIVE SCORE-----------------------------
-router.get('/:id/givescore',(req,res)=>{
+router.get('/:id/givescore/:SubjectId',(req,res)=>{
+  console.log(req.body.SubjectId);
   model.Student.findById(req.params.id).then(rows=>{
     model.StudentSubject.findAll({
                                   include:[model.Subject],
-                                  where:{StudentId:req.params.id},
+                                  where:{
+                                    StudentId:req.params.id,
+                                    SubjectId:req.params.SubjectId
+                                  }
                                })
     .then(rowsConjunction=>{
-      // console.log(rowsConjunction[0].SubjectId);
       res.render('subjectGiveScore',{data:rows,dataConjunction:rowsConjunction})
     })
   })
@@ -50,7 +51,8 @@ router.post('/:id/givescore',(req,res)=>{ //params punya student
   console.log('========================='+req.body.SubjectId);
   model.StudentSubject.update(
                               {score:req.body.score},
-                              {where:{StudentId:req.params.id}}
+                              {where:{SubjectId:req.body.SubjectId,
+                              $and: {StudentId:req.params.id}}}
                               )
   .then(()=>{
     res.redirect(`/subjects/${req.body.SubjectId}/enrolledstudents`)

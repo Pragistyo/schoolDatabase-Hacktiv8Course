@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <style media="screen">
+    .type {
+      color:  #428bca;
+      text-align: center;
+      background-color: #f6f6f6;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 3em;
+      padding-top: 12em;
+      padding-bottom: 13em;
+    }
+
+    .type-r2 {
+      font-size: 4.5em;
+      color: darkgray;
+      line-height: 1em;
+      font-weight: 500;
+      position: relative;
+      display: inline-block;
+      margin: 0;
+    }
+
+    body {
+      margin-top: 30px;
+      background-color: #FFF5EE;
+      /*#f7f5ea;*/
+    }
+    table{
+      margin-top: -200px;
+    }
+    </style>
+    <title>pageTitle</title>
+  </head>
+  <div class="col-md-10 col-md-offset-1">
+     <ul class="nav nav-tabs nav-justified">
+         <!-- <li role="presentation"><a href="/">Home</a><br></li>
+         <li role="presentation" class="active"><a href="/subjects">SUBJECTS</a><br><br>
+         <li role="presentation"><a href="/students">STUDENTS</a><br><br>
+         <li role="presentation"><a href="/teachers">TEACHER</a><br><br> -->
+     </ul>
+   </div>
+   <div class="type">
+     <h1 class="type-r2">Subjects Database</h1><br>
+   </div>
+  <body>
+      <table class="table table-bordered">
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">subject_name</th>
+            <th class="text-center">Assigned Teacher</th>
+            <th class="text-center">Action</th>
+          </tr>
+          <%let count2 = 0%>
+          <%data.forEach(z=>{%>
+          <tr>
+            <%count2 ++%>
+              <td class="text-center"><%=count2%></td>
+              <td class="text-center"><%=z.subject_name%></td>
+              <%if(z.Teachers){%>
+                <%let arr   = []%>
+                <%let count = 0%>
+                <td class="text-center">
+                  <ol>
+                      <%z.Teachers.forEach(a=>{%>
+                        <%count ++%>
+                          <li><%=a.first_name%> <%=a.last_name%></li>
+                        <%})%>
+                  </ol>
+                </td>
+              <%}else{%>
+                <td class="text-center">No Teacher assigned yet</td>
+              <%}%>
+              <td class="text-center"><a href="/subjects/<%=z.id%>/enrolledstudents">enrolled students</a></td>
+              <%})%>
+          </tr>
+      </table><br>
+    <a href="/"><button type="button" name="button">Home</button></a>
+  </body>
+</html>

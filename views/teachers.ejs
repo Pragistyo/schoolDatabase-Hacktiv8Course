@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>TEACHERS DATABASE</title>
-  </head>
-  <h1>TEACHERS DATABASE</h1><br>
-  <a href="/teachers/add">ADD TEACHERS</a><br>
+  <%-include partial/header%>
+  <!-- <title><%=pageTitle%></title> -->
   <body>
-    <table border ="1">
+  </body>
+   <div class="col-md-10 col-md-offset-1">
+      <ul class="nav nav-tabs nav-justified">
+          <li role="presentation"><a href="/">Home</a><br></li>
+          <li role="presentation"><a href="/subjects">SUBJECTS</a><br><br>
+          <li role="presentation"><a href="/students">STUDENTS</a><br><br>
+          <li role="presentation" class="active"><a href="/teachers">TEACHER</a><br><br>
+      </ul>
+    <div class="type-r1">
+      <h1 class="type-r3">Teachers Database</h1><br>
+      <a href="/teachers/add">ADD TEACHERS</a><br><br>
+    </div>
+
+    <table class="table table-bordered">
       <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Subject</th>
-        <th>Options</th>
+        <th class="text-center">No</th>
+        <th class="text-center">ID</th>
+        <th class="text-center">First Name</th>
+        <th class="text-center">Last Name</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Subject</th>
+        <th class="text-center">Options</th>
       </tr>
+      <%let count = 0%>
       <%data.forEach(z=>{%>
-        <tr>
-          <td><%=z.id%></td>
-          <td><%=z.first_name%></td>
-          <td><%=z.last_name%></td>
-          <td><%=z.email%></td>
+        <tr class="main">
+          <%count++%>
+          <td class="text-center"><%=count%></td>
+          <td class="text-center"><%=z.id%></td>
+          <td class="text-center"><%=z.first_name%></td>
+          <td class="text-center"><%=z.last_name%></td>
+          <td class="text-center"><%=z.email%></td>
           <%if(z.Subject){%>
-            <td><%=z.Subject.subject_name%></td>
+            <td class="text-center"><%=z.Subject.subject_name%></td>
           <%}else{%>
-            <td>Unassign</td>
+            <td class="text-center">Unassign</td>
           <%}%>
-          <td>
-            <a href="/teachers/edit/<%=z.id%>">EDIT</a> ||
-            <a href="/teachers/delete/<%=z.id%>">DELETE</a>
+          <td class="text-center">
+            <a href="/teachers/edit/<%=z.id%>"><button type="button" name="button">EDIT</button></a>
+            <a href="/teachers/delete/<%=z.id%>"><button type="button" name="button">DELETE</button></a>
           </td>
       <%})%>
         </tr>
-    </table><br>
-    <a href="/">Home</a>
-  </body>
+    </table>
+    <!-- <a href="/"><button type="button" name="button">Home</button></a> -->
+    </div>
 </html>

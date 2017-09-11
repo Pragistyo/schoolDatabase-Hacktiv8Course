@@ -1,0 +1,14 @@
+<%let title = pageTitle%>
+<%let arrSlash    = ['/','/subjects','/students','/teachers']%>
+<%let description = ['HOME','Subjects','Students','Teachers']%>
+
+
+  <%description.forEach(z=>{%>
+    if(z == "hacktiv8 School Database"){
+      <li role="presentation" class="active"><a href="/">Home</a></li>
+    }else if(z == title){
+      <li role="presentation" class="active"><a href="/<%=title.toLoweCase()%>"><%=z%></a></li>
+    }else {
+      <li role="presentation"><a href="/<%=title.toLowerCase()%>"><%=z%></a></li>
+    }
+  <%})%>

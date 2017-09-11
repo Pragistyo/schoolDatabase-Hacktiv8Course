@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   StudentSubject.associate = models=>{
-    StudentSubject.belongsTo(models.Student),
+    StudentSubject.belongsTo(models.Student)
     StudentSubject.belongsTo(models.Subject)
   }
 

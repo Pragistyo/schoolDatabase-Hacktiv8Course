@@ -37,7 +37,7 @@
           <td class="text-center"><%=z.first_name%></td>
           <td class="text-center"><%=z.last_name%></td>
           <td class="text-center"><%=z.email%></td>
-          <%if(z.Subject){%>
+          <%if((z.Subject) || (z.Subject > 0)){%>
             <td class="text-center"><%=z.Subject.subject_name%></td>
           <%}else{%>
             <td class="text-center"><font color="red">Unassign</font></td>

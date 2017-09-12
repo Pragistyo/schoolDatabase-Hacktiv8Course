@@ -18,6 +18,7 @@
           <label>Email: </label><br>
           <input type="text" name="email" value="" placeholder="input your Email"><br>
           <select name="SubjectId">
+            <option value="">Not Assign Yet</option>
             <%data.forEach(z=>{%>
               <option value="<%=z.id%>"><%=z.subject_name%></option>
             <%})%>

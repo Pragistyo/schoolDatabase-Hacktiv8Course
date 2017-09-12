@@ -44,17 +44,20 @@ router.get('/add',(req,res)=>{
 })
 
 router.post('/add',(req,res)=>{
-  model.Teacher.create({
-    first_name: req.body.first_name,
-    last_name:req.body.last_name,
-    email:req.body.email,
-    SubjectId:req.body.SubjectId
-  }).then(()=>{
-      res.redirect('/teachers')
-  })
-  .catch(err=>{
-    res.render('teachersAdd',{err_msg: "Validation error: email format is incorrect or already exist",pageTitle:"Add Teacher"})
-  })
+  if(req.body.SubjectId ==""){
+    req.body.SubjectId = 0
+  }
+    model.Teacher.create({
+                            first_name: req.body.first_name,
+                            last_name:req.body.last_name,
+                            email:req.body.email,
+                            SubjectId:req.body.SubjectId
+    }).then(()=>{
+        res.redirect('/teachers')
+    })
+    .catch(err=>{
+      res.render('teachersAdd',{err_msg: "Validation error: email format is incorrect or already exist",pageTitle:"Add Teacher"})
+    })
 })
 
 //-------------------------GET EDIT-----------------------------

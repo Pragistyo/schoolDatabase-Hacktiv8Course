@@ -29,5 +29,5 @@ app.use('/teachers', teachers)
 
 
 app.listen(process.env.PORT || 3000,()=>{
-  console.log('Port 3003 Opened !');
+  console.log('Port 3000 Opened !');
 })

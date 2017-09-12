@@ -9,11 +9,11 @@ module.exports = {
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
-    return queryInterface.changeColumn('Users','salt',
-        {
-        // type: Sequelize.STRING,
-        unique: true
-      });
+    // return queryInterface.changeColumn('Users','salt',
+    //     {
+    //     // type: Sequelize.STRING,
+    //     unique: true
+    //   });
   },
 
   down: function (queryInterface, Sequelize) {

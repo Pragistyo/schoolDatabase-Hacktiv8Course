@@ -2,6 +2,7 @@ const express    = require('express')
 const bodyParser = require('body-parser');
 const app        = express();
 const session    = require('express-session')
+const env        = process.env.NODE_ENV || "development";
 
 
 app.set('view engine', 'ejs')
@@ -27,6 +28,6 @@ app.use('/students', students)
 app.use('/teachers', teachers)
 
 
-app.listen(process.env.PORT || 3003,()=>{
+app.listen(process.env.PORT || 3000,()=>{
   console.log('Port 3003 Opened !');
 })

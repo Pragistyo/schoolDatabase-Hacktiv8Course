@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>pageTitle</title>
-  </head>
-  <h1><%=data.dataValues.subject_name%></h1>
-  <a href="/subjects"> return to subject list</a><br><br>
+<%-include partial/header%>
+  <div class="type-r0">
+    <h1><%=data.dataValues.subject_name%></h1>
+    <a href="/subjects"> return to subject list</a><br><br>
+  </div><br><br>
+  <div class="table-edit">
   <body>
-    <table border ="1">
-      <tr>
-        <th>Name</th>
-        <th>Score</th>
-      </tr>
-      <%data.Students.forEach(z=>{%>
-      <tr>
-        <td><%=`${z.first_name} ${z.last_name}`%></td>
-        <%if(z.StudentSubject.dataValues.score){%>
-          <td><%=z.StudentSubject.dataValues.score%></td>
-        <%}else{%>
-          <td>
-              <a href="/subjects/<%=z.id%>/givescore/<%=data.dataValues.id%>">GIVE SCORE</a>
-          </td>
-        <%}%>
-        <%})%>
-      </tr>
-    </table>
-  </body>
+      <table class="table table-bordered"border="1.3">
+        <tr>
+          <th>Name</th>
+          <th>Score</th>
+          <th>Letter Score</th>
+        </tr>
+        <%data.Students.forEach(z=>{%>
+        <tr>
+          <td><%=`${z.first_name} ${z.last_name}`%></td>
+          <%if(z.StudentSubject.dataValues.score){%>
+            <td><%=z.StudentSubject.dataValues.score%></td>
+          <%}else{%>
+            <td>
+                <a href="/subjects/<%=z.id%>/givescore/<%=data.dataValues.id%>">GIVE SCORE</a>
+            </td>
+          <%}%>
+            <%if(z.dataValues.letterConvert){%>
+            <td><%=z.dataValues.letterConvert%></td>
+          <%}else{%>
+            <td><font color="red">Empty</font></td>
+          <%}%>
+          <%})%>
+        </tr>
+      </table>
+    </body>
+  </div>
 </html>

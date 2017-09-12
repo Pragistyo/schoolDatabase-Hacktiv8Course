@@ -2,7 +2,18 @@ const express      = require('express');
 const router       = express.Router();
 const model        = require('../models')
 
-//-----------------------------GET------------------------------
+//------------------------MIDDLEWARE SESSION-----------------------
+router.use((req,res,next)=>{
+  if((req.session.Login)&&(req.session.role == 'headmaster')){
+    next()
+  }
+  else{
+    // res.redirect('/')
+      res.render('index',{pageTitle:"hacktiv8 School Database",err_msg:'TEACHERS'})
+  }
+})
+
+//----------------------------FIRST PAGE---------------------------
 router.get('/',(req,res)=>{
   model.Teacher.findAll({order:[['first_name', 'ASC']],include:[model.Subject]}).then(jainal=>{
 
@@ -28,7 +39,7 @@ router.get('/',(req,res)=>{
 //----------------------------ADD-------------------------------
 router.get('/add',(req,res)=>{
   model.Subject.findAll().then(rowsSubject=>{
-    res.render('teachersAdd',{data:rowsSubject,err_msg:false})
+    res.render('teachersAdd',{data:rowsSubject,err_msg:false,pageTitle:"Add Teacher"})
   })
 })
 
@@ -42,7 +53,7 @@ router.post('/add',(req,res)=>{
       res.redirect('/teachers')
   })
   .catch(err=>{
-    res.render('teachersAdd',{err_msg: "Validation error: email format is incorrect or already exist"})
+    res.render('teachersAdd',{err_msg: "Validation error: email format is incorrect or already exist",pageTitle:"Add Teacher"})
   })
 })
 
@@ -51,7 +62,7 @@ router.get('/edit/:id',(req,res)=>{
   model.Teacher.findById(req.params.id).then(rows=>{
     model.Subject.findAll().then(rowsSubject=>{
       // res.send(rows)
-      res.render('teachersEdit',{data:rows,dataSubject:rowsSubject,err_msg:false})
+      res.render('teachersEdit',{data:rows,dataSubject:rowsSubject,err_msg:false,pageTitle:"Edit Teacher"})
     })
   })
 })

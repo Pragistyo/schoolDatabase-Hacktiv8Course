@@ -10,11 +10,13 @@
           <li role="presentation"><a href="/subjects">SUBJECTS</a><br><br>
           <li role="presentation"><a href="/students">STUDENTS</a><br><br>
           <li role="presentation" class="active"><a href="/teachers">TEACHER</a><br><br>
+          <li role="presentation"><a href="/logout">LOGOUT</a><br><br>
       </ul>
     <div class="type-r1">
-      <h1 class="type-r3">Teachers Database</h1><br>
+      <h1 class="type-r3">Teachers Database</h1>
       <a href="/teachers/add">ADD TEACHERS</a><br><br>
     </div>
+    <body class="table-edit">
 
     <table class="table table-bordered">
       <tr>
@@ -38,7 +40,7 @@
           <%if(z.Subject){%>
             <td class="text-center"><%=z.Subject.subject_name%></td>
           <%}else{%>
-            <td class="text-center">Unassign</td>
+            <td class="text-center"><font color="red">Unassign</font></td>
           <%}%>
           <td class="text-center">
             <a href="/teachers/edit/<%=z.id%>"><button type="button" name="button">EDIT</button></a>
@@ -47,6 +49,4 @@
       <%})%>
         </tr>
     </table>
-    <!-- <a href="/"><button type="button" name="button">Home</button></a> -->
-    </div>
-</html>
+    <%- include partial/footer%>

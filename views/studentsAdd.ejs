@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<%-include partial/header%>
+  <!-- <head>
     <meta charset="utf-8">
-    <title>pageTitle</title>
-    <h1>ADD STUDENTS DATA</h1><br>
-    <a href="/students">show all data</a><br>
-  </head>
+    <title><%=pageTitle%></title>
+  </head> -->
+  <div class="type-r0">
+  <h1>ADD STUDENTS DATA</h1><br>
+  <a href="/students">show all data</a><br><br>
   <body>
     <form action="/students/add/" method="post">
       <fieldset>
@@ -23,4 +25,5 @@
       <%  }%>
     <a href="/students">BACK</a>
   </body>
+  </div>
 </html>

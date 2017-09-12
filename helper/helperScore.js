@@ -1,4 +1,4 @@
-Function convertScore(Student) => {
+function convertScore(Student) {
 
   let letterConvert
   if(Student.StudentSubject.score == null){letterConvert = 'empty'}
@@ -7,7 +7,8 @@ Function convertScore(Student) => {
   else if (Student.StudentSubject.score > 55){letterConvert = 'C'}
   else{letterConvert = 'E'}
 
-  Student.letterConvert = letterConvert
+  Student.dataValues.letterConvert = letterConvert
+  console.log(Student);
   return Student
 }
 

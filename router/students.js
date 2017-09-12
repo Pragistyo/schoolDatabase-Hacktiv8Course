@@ -2,6 +2,17 @@ const express = require('express');
 const router  = express.Router();
 const model   = require('../models')
 
+//------------------------MIDDLEWARE SESSION-----------------------
+router.use((req,res,next)=>{
+  if((req.session.Login) && (req.session.role == 'teacher' || req.session.role == 'headmaster' || req.session.role == 'academic')){
+    next()
+  }
+  else{
+      res.render('index',{pageTitle:"hacktiv8 School Database",err_msg:'STUDENTS'})
+
+  }
+})
+
 //----------------------------FIRST PAGE---------------------------
 router.get('/',(req,res)=>{
   model.Student.findAll({order:[['first_name','ASC']]}).then(deny=>{
@@ -30,7 +41,7 @@ router.get('/',(req,res)=>{
 
 router.get('/add',(req,res)=>{
   // res.send('hacktiv8')
-  res.render('studentsAdd',{err_msg:false})
+  res.render('studentsAdd',{err_msg:false,pageTitle:"Add Student"})
 })
 
 router.post('/add',(req,res)=>{
@@ -44,16 +55,15 @@ router.post('/add',(req,res)=>{
     {res.redirect('/students')}
   })
   .catch(err=>{
-    // res.send(err)
     // res.send('blabla')
-    res.render('studentsAdd',{err_msg:"Validation error: email format is incorrect or already exist"})
+    res.render('studentsAdd',{err_msg:"Validation error: email format is incorrect or already exist",pageTitle:"Add Student"})
   })
 })
 //-------------------------GET EDIT-----------------------------
 
 router.get('/edit/:id',(req,res)=>{
   model.Student.findById(req.params.id).then(datanya=>{
-    res.render('studentsEdit',{data:datanya,err_msg:false})
+    res.render('studentsEdit',{data:datanya,err_msg:false,pageTitle:"editStudent"})
     // res.send(datanya)
   })
   .catch(err=>{
@@ -75,7 +85,7 @@ router.post('/edit/:id',(req,res)=>{
   })
   .catch(err=>{
     model.Student.findById(req.params.id).then(datanya=>{
-      res.render('studentsEdit',{data:datanya,err_msg:"Validation error: email format is incorrect"})
+      res.render('studentsEdit',{data:datanya,err_msg:"Validation error: email format is incorrect",pageTitle:"editStudent"})
     })
   })
 })
@@ -84,7 +94,7 @@ router.post('/edit/:id',(req,res)=>{
 router.get('/:id/addsubject',(req,res)=>{
   model.Student.findById(req.params.id).then(rows=>{
     model.Subject.findAll().then(rowsSubject=>{
-      res.render('subjectStudentAdd',{data:rows,dataSubject:rowsSubject,err_msg:false})
+      res.render('subjectStudentAdd',{data:rows,dataSubject:rowsSubject,err_msg:false,pageTitle:"Add Subject to Student"})
     })
   })
 })

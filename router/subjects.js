@@ -1,7 +1,20 @@
-const express = require('express');
-const router  = express.Router();
-const model   = require('../models')
+const express      = require('express');
+const router       = express.Router();
+const model        = require('../models')
+const convertScore = require('../helper/helperScore.js');
 
+//------------------------MIDDLEWARE SESSION-----------------------
+router.use((req,res,next)=>{
+  if((req.session.Login)&&(req.session.role == 'headmaster' || req.session.role == 'academic')){
+    next()
+  }
+  else{
+    // res.redirect('/')
+      res.render('index',{pageTitle:"hacktiv8 School Database",err_msg:'SUBJECTS'})
+  }
+})
+
+//----------------------------FIRST PAGE---------------------------
 
 router.get('/',(req,res)=>{
   model.Subject.findAll({include:[model.Teacher]}).then(blabla=>{
@@ -13,15 +26,19 @@ router.get('/',(req,res)=>{
 //----------------------------ENROLLED STUDENT-------------------------------
 router.get('/:id/enrolledstudents',(req,res)=>{
 
-  model.Subject.findById(req.params.id).then(rows=>{
+  // model.Subject.findById(req.params.id).then(rows=>{
     model.Subject.findAll({
                                  include:[model.Student],
                                  where:{id:req.params.id}
                                 })
-      .then(rowsConjunction=>{
-      res.render('studentEnrolled',{data:rowsConjunction[0]})
+      .then(rowsStudentConjunction=>{
+        rowsStudentConjunction[0].Students.map(eachStudent=>{
+          return convertScore(eachStudent)
+        })
+        // res.send(rowsStudentConjunction[0])//foreach Students
+      res.render('studentEnrolled',{data:rowsStudentConjunction[0],pageTitle:"studentEnrolled"})
     })
-  })
+  // })
   .catch(err=>{
     throw err.toString()
   })
@@ -39,7 +56,7 @@ router.get('/:id/givescore/:SubjectId',(req,res)=>{
                                   }
                                })
     .then(rowsConjunction=>{
-      res.render('subjectGiveScore',{data:rows,dataConjunction:rowsConjunction})
+      res.render('subjectGiveScore',{data:rows,dataConjunction:rowsConjunction,pageTitle:"Give Score"})
     })
   })
   .catch(err=>{

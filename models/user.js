@@ -20,9 +20,9 @@ module.exports = function(sequelize, DataTypes) {
 //    model.password = crypto.createHmac('sha256', model.salt)
                                           // .update(model.password)
                                           // .digest('hex');
-// })
-crypto.createHmac('sha256', secret)
-                   .update('I love cupcakes')
-                   .digest('hex');
+// // })
+// crypto.createHmac('sha256', secret)
+//                    .update('I love cupcakes')
+//                    .digest('hex');
   return User;
 };

@@ -4,13 +4,14 @@
   <body class= "type-r1">
     <h1>REGISTER</h1>
     <form action="/register" method="post">
-      <input type="text" name="username" value="" placeholder="username">
-      <input type="password" name="password" value="" placeholder="password">
+      <label>Select Your Role</label>
       <select class="" name="role">
         <option value="teachers">teachers</option>
         <option value="academic">academic</option>
         <option value="headmaster">headmaster</option>
-      </select>
+      </select><br>
+      <input type="text" name="username" value="" placeholder="username">
+      <input type="password" name="password" value="" placeholder="password">
       <button type="submit" name="button">Submit</button>
     </form>
     <%if(err_msg){%>

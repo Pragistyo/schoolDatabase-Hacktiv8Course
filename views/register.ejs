@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <%- include partial/header%>
+  <body class= "type-r1">
+    <h1>REGISTER</h1>
+    <form action="/register" method="post">
+      <input type="text" name="username" value="" placeholder="username">
+      <input type="password" name="password" value="" placeholder="password">
+      <select class="" name="role">
+        <option value="teachers">teachers</option>
+        <option value="academic">academic</option>
+        <option value="headmaster">headmaster</option>
+      </select>
+      <button type="submit" name="button">Submit</button>
+    </form>
+    <%if(err_msg){%>
+      <p><font color="red">Username already been used</font></p>
+    <%}%><br>
+    <a href="/login"><button type="button" name="button">BACK TO LOGIN</button></a>
+  </body>
+</html>

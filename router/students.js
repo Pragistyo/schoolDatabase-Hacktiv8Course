@@ -16,6 +16,9 @@ router.use((req,res,next)=>{
 //----------------------------FIRST PAGE---------------------------
 router.get('/',(req,res)=>{
   model.Student.findAll({order:[['first_name','ASC']]}).then(deny=>{
+  // model.Subject.findAll({include:[model.Student]}).then(haha=>{
+  //   res.send(haha)
+  // })
     // let alphabetArr  = "abcdefghijklmnopqrstuvwxyz".split('')
     // for (var i = 0; i < deny.length; i++) {
     //   for (var j = i+1; j < deny.length; j++) {

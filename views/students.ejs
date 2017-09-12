@@ -3,12 +3,17 @@
   <%-include partial/header%>
   <!-- <title><%=pageTitle%></title> -->
   <div class="col-md-10 col-md-offset-1">
-    <ul class="nav nav-tabs nav-justified">
+    <ul class="nav nav-tab nav-justified">
         <li role="presentation"><a href="/">Home</a><br></li>
-        <li role="presentation"><a href="/subjects">SUBJECTS</a><br><br>
-        <li role="presentation" class="active"><a href="/students">STUDENTS</a><br><br>
-        <li role="presentation"><a href="/teachers">TEACHER</a><br><br>
-        <li role="presentation"><a href="/logout">LOGOUT</a><br><br>
+        <li role="presentation"><a href="/subjects">SUBJECTS</a><br><br></li>
+        <li role="presentation" class="active"><a href="#">STUDENTS</a><br><br></li>
+        <li role="presentation" class="dropdown"><a href="#">TEACHER<span class="caret"></span></a><br><br>
+          <div class="dropdown-content">
+            <a class="dropdown" href="/teachers">Show Teachers Data</a><br>
+            <a href="/teachers/add">Add Teacher</a>
+        </div>
+        </li>
+        <li role="presentation"><a href="/logout">LOGOUT</a><br><br></li>
     </ul>
   <div class="type-r1">
     <h1 class="type-r3">Students Database</h1>

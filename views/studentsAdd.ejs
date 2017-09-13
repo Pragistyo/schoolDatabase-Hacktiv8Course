@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
 <%-include partial/header%>
-  <!-- <head>
-    <meta charset="utf-8">
-    <title><%=pageTitle%></title>
-  </head> -->
   <div class="type-r0">
   <h1>ADD STUDENTS DATA</h1><br>
-  <a href="/students">show all data</a><br><br>
+  <a href="/students">Show all data STUDENTS</a><br><br>
+  <div class="">
   <body>
     <form action="/students/add/" method="post">
       <fieldset>
@@ -23,7 +18,5 @@
     <%if(err_msg){ %>
       <p><%=err_msg%></p>
       <%  }%>
-    <a href="/students">BACK</a>
-  </body>
-  </div>
-</html>
+    <a href="/">HOME</a>
+<%- include partial/footer%>

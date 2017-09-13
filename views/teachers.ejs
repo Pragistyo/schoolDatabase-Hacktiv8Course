@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html>
   <%-include partial/header%>
-  <!-- <title><%=pageTitle%></title> -->
-  <body>
-  </body>
-   <div class="col-md-10 col-md-offset-1">
-      <ul class="nav nav-tabs nav-justified">
+  <%-include partial/menuBar%>
           <li role="presentation"><a href="/">Home</a><br></li>
           <li role="presentation"><a href="/subjects">SUBJECTS</a><br><br>
-          <li role="presentation"><a href="/students">STUDENTS</a><br><br>
+          <li role="presentation" class="dropdown"><a href="#">STUDENTS<span class="caret"></span></a>
+              <div class="dropdown-content">
+                <a href="/students">Show Students Data</a><br>
+                <a href="/students/add">Add Students</a>
+            </div>
+           </li>
           <li role="presentation" class="active"><a href="/teachers">TEACHER</a><br><br>
           <li role="presentation"><a href="/logout">LOGOUT</a><br><br>
       </ul>
@@ -17,7 +16,6 @@
       <a href="/teachers/add">ADD TEACHERS</a><br><br>
     </div>
     <body class="table-edit">
-
     <table class="table table-bordered">
       <tr>
         <th class="text-center">No</th>

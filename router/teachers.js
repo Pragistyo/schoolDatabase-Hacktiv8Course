@@ -56,7 +56,9 @@ router.post('/add',(req,res)=>{
         res.redirect('/teachers')
     })
     .catch(err=>{
-      res.render('teachersAdd',{err_msg: "Validation error: email format is incorrect or already exist",pageTitle:"Add Teacher"})
+        model.Subject.findAll().then(rowsSubject=>{
+          res.render('teachersAdd',{data:rowsSubject,err_msg: err.errors[0].message,pageTitle:"Add Teacher"})
+        })
     })
 })
 
@@ -71,6 +73,9 @@ router.get('/edit/:id',(req,res)=>{
 })
 //-----------------------EDIT UPDATE----------------------------
 router.post('/edit/:id',(req,res)=>{
+  if(req.body.SubjectId ==""){
+    req.body.SubjectId = 0
+  }
   model.Teacher.update({
                         first_name: req.body.first_name,
                         last_name:req.body.last_name,
@@ -84,7 +89,12 @@ router.post('/edit/:id',(req,res)=>{
     res.redirect('/teachers')
   })
   .catch(err=>{
-    throw err.toString()
+    model.Teacher.findById(req.params.id).then(rows=>{
+      model.Subject.findAll().then(rowsSubject=>{
+        // res.send(rows)
+        res.render('teachersEdit',{data:rows,dataSubject:rowsSubject,err_msg:err.errors[0].message,pageTitle:"Edit Teacher"})
+      })
+    })
   })
 
 })

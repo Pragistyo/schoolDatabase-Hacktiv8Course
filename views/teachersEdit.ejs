@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
   <%- include partial/header%>
-  <!-- <head>
-    <meta charset="utf-8">
-    <title><%=pageTitle%></title><br>
-  </head> -->
   <div class="type-r0">
     <h1>EDIT TEACHER</h1>
     <a href="/teachers">show all data</a><br><br>
@@ -25,6 +19,7 @@
               <option value="<%=z.id%>"><%=z.subject_name%></option>
             <% }%>
             <%})%>
+            <option value="">Unassign</option>
           </select>
           <button type="submit">SAVE</button>
         </fieldset>
@@ -32,6 +27,4 @@
       <%if(err_msg){ %>
         <p><%=err_msg%></p>
         <%  }%>
-    </body>
-  </div>
-</html>
+  <%- include partial/footer%>

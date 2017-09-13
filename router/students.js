@@ -103,18 +103,35 @@ router.get('/:id/addsubject',(req,res)=>{
 })
 
 router.post('/:id/addsubject',(req,res)=>{
-  model.StudentSubject.create({
-                                StudentId:req.params.id,
-                                SubjectId:req.body.SubjectId
-                              })
-  .then(()=>{
-    res.redirect('/students')
-  })
-  .catch(err=>{
-    throw err.toString()
-  })
-})
+  model.StudentSubject.findOne({where:{StudentId:req.params.id}}).then(conj=>{
 
+    let count = false;
+    for (var i = 0; i < conj.length; i++) {
+      if(req.body.SubjectId == conj[i].SubjectId){
+        count = true
+      }
+    }
+    if(count == true){
+      model.StudentSubject.create({
+                                    StudentId:req.params.id,
+                                    SubjectId:req.body.SubjectId
+                                  })
+      .then(()=>{
+        res.redirect('/students')
+      })
+    }
+    else{
+      model.Student.findById(req.params.id).then(rows=>{
+        model.Subject.findAll().then(rowsSubject=>{
+          res.render('subjectStudentAdd',{data:rows,dataSubject:rowsSubject,err_msg:"Already has subject",pageTitle:"Add Subject to Student"})
+        })
+      })
+    }
+    // .catch(err=>{
+    //     throw err.toString()
+    //   })
+    })
+  })
 //-------------------------DELETE----------------------------------
 
 router.get('/delete/:id',(req,res)=>{

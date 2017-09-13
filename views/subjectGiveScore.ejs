@@ -5,14 +5,14 @@
       <form action="/subjects/<%=data.id%>/givescore" method="post">
         <fieldset>
               <label>FIRST NAME</label>:
-              <label name= "first_name"><%=data.first_name%></label><br>
+              <label name= "first_name"><%=data[0].dataValues.Student.first_name%></label><br>
               <label>LAST NAME</label>:
-              <label name= "last_name"><%=data.last_name%></label><br>
+              <label name= "last_name"><%=data[0].dataValues.Student.last_name%></label><br>
 
           <div>
               <label>SUBJECT</label>  :
-              <label name= "SubjectId" value="<%=dataConjunction[0].SubjectId%>"><%=dataConjunction[0].Subject.subject_name%></label>
-              <input type="hidden" name="SubjectId" value="<%=dataConjunction[0].SubjectId%>">
+              <label name= "SubjectId" value="<%=data[0].SubjectId%>"><%=data[0].Subject.subject_name%></label>
+              <input type="hidden" name="SubjectId" value="<%=data[0].SubjectId%>">
           </div>
         </fieldset>
         <div class="form-group">

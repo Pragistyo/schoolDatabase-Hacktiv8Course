@@ -18,7 +18,7 @@
             <td><%=z.StudentSubject.dataValues.score%></td>
           <%}else{%>
             <td>
-                <a href="/subjects/<%=z.id%>/givescore/<%=data.dataValues.id%>">GIVE SCORE</a>
+                <a href="/subjects/<%=z.StudentSubject.dataValues.id%>/givescore">GIVE SCORE</a>
             </td>
           <%}%>
             <%if(z.dataValues.letterConvert){%>
@@ -29,4 +29,4 @@
           <%})%>
         </tr>
       </table>
-  <%-include partial/footer%>  
+  <%-include partial/footer%>

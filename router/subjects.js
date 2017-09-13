@@ -45,20 +45,23 @@ router.get('/:id/enrolledstudents',(req,res)=>{
 })
 
 //-------------------------GIVE SCORE-----------------------------
-router.get('/:id/givescore/:SubjectId',(req,res)=>{
-  console.log(req.body.SubjectId);
-  model.Student.findById(req.params.id).then(rows=>{
+router.get('/:id/givescore',(req,res)=>{
+  // console.log(req.body.SubjectId);
+  // model.Student.findById(req.params.id).then(rows=>{
     model.StudentSubject.findAll({
-                                  include:[model.Subject],
+                                  include:[{all:true}],
                                   where:{
-                                    StudentId:req.params.id,
-                                    SubjectId:req.params.SubjectId
+                                       id:req.params.id
+    //                                 StudentId:req.params.id,
+    //                                 SubjectId:req.params.SubjectId
                                   }
                                })
     .then(rowsConjunction=>{
-      res.render('subjectGiveScore',{data:rows,dataConjunction:rowsConjunction,pageTitle:"Give Score"})
+      // res.send(rowsConjunction[0])
+      res.render('subjectGiveScore',{data:rowsConjunction,pageTitle:"Giv,{data:rowsConjue Score"})
+      // res.render('subjectGiveScore',{data:rows,dataConjunction:rowsConjunction,pageTitle:"Give Score"})
     })
-  })
+  // })
   .catch(err=>{
     throw err.toString()
   })

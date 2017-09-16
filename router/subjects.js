@@ -72,7 +72,7 @@ router.post('/:id/givescore',(req,res)=>{ //params punya student
   model.StudentSubject.update(
                               {score:req.body.score},
                               {where:{SubjectId:req.body.SubjectId,
-                              $and: {StudentId:req.params.id}}}
+                              $and: {StudentId:req.body.StudentId}}}
                               )
   .then(()=>{
     res.redirect(`/subjects/${req.body.SubjectId}/enrolledstudents`)

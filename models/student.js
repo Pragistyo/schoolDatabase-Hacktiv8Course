@@ -34,6 +34,7 @@ module.exports = function(sequelize, DataTypes) {
 
   Student.associate = models=>{
     Student.belongsToMany(models.Subject,{through:'StudentSubject'})
+    Student.hasMany(models.StudentSubject)
   }
   return Student;
 };
